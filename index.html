@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Baba — Ristorante Kebap · Pizza | Cuneo</title>
+<meta name="description" content="Ali Baba, Ristorante Kebap e Pizza a Cuneo, Corso Nizza 54. Prenota per telefono o ordina su WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1712;
+    --green-deep:#1f3d2e;
+    --green-deeper:#152b21;
+    --brick:#b23a2e;
+    --brick-dark:#8f2c22;
+    --saffron:#d9a441;
+    --paper:#f3ead9;
+    --cream:#faf6ee;
+    --line: rgba(28,23,18,0.12);
+    --line-light: rgba(250,246,238,0.18);
+    --radius: 14px;
+    --maxw: 1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--green-deep);
+    border-bottom:1px solid rgba(0,0,0,0.15);
+  }
+  header .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:12px; padding-bottom:12px;
+    gap:20px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+  }
+  .brand img{
+    height:44px; width:auto;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+    background:var(--cream);
+    border-radius:8px;
+    padding:4px 8px;
+  }
+  nav{
+    display:flex; gap:28px;
+  }
+  nav a{
+    color:var(--cream);
+    text-decoration:none;
+    font-size:0.92rem;
+    font-weight:600;
+    letter-spacing:0.01em;
+    opacity:0.88;
+    padding:6px 0;
+    border-bottom:2px solid transparent;
+    transition:opacity 0.2s, border-color 0.2s;
+  }
+  nav a:hover{ opacity:1; border-color:var(--saffron); }
+  .nav-toggle{ display:none; }
+
+  @media (max-width:760px){
+    nav{ display:none; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 85% 20%, rgba(217,164,65,0.16), transparent 45%),
+      linear-gradient(180deg, var(--green-deep), var(--green-deeper));
+    color:var(--cream);
+    padding:72px 0 84px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:0.74rem;
+    color:var(--saffron);
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--saffron);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1.06;
+    color:var(--cream);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--saffron);
+  }
+  .hero p.lead{
+    margin-top:22px;
+    font-size:1.08rem;
+    line-height:1.6;
+    max-width:46ch;
+    color:rgba(250,246,238,0.82);
+  }
+  .cta-row{
+    margin-top:34px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 24px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:0.96rem;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    cursor:pointer;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-call{
+    background:var(--brick);
+    color:var(--cream);
+    box-shadow:0 10px 24px -10px rgba(178,58,46,0.6);
+  }
+  .btn-call:hover{ background:var(--brick-dark); }
+  .btn-whatsapp{
+    background:#25D366;
+    color:#06210f;
+    box-shadow:0 10px 24px -10px rgba(37,211,102,0.5);
+  }
+  .btn-whatsapp:hover{ background:#1fb958; }
+  .btn-outline{
+    background:transparent;
+    color:var(--cream);
+    border-color:rgba(250,246,238,0.4);
+  }
+  .btn-outline:hover{ border-color:var(--saffron); color:var(--saffron); }
+
+  .hero-info{
+    margin-top:28px;
+    display:flex; gap:22px; flex-wrap:wrap;
+    font-size:0.85rem;
+    color:rgba(250,246,238,0.7);
+  }
+  .hero-info span{ display:flex; align-items:center; gap:7px; }
+
+  /* signature medallion */
+  .medallion-wrap{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .medallion{
+    width:min(360px, 82vw);
+    height:min(360px, 82vw);
+    animation:spin 34s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .medallion-center{
+    position:absolute;
+    width:34%; height:34%;
+    border-radius:50%;
+    background:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.35);
+  }
+  .medallion-center span{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    color:var(--brick);
+    font-size:1.1rem;
+  }
+
+  /* ---------- strip ---------- */
+  .strip{
+    background:var(--saffron);
+    color:var(--ink);
+  }
+  .strip .wrap{
+    display:flex; flex-wrap:wrap;
+    gap:12px 34px;
+    padding:16px 28px;
+    justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .strip .wrap span{ opacity:0.9; }
+
+  /* ---------- sections generic ---------- */
+  section{ padding:88px 0; }
+  .section-head{
+    max-width:640px;
+    margin:0 auto 48px;
+    text-align:center;
+  }
+  .section-head .eyebrow{ color:var(--brick); justify-content:center; }
+  .section-head .eyebrow::before{ background:var(--brick); }
+  .section-head h2{
+    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
+  }
+  .section-head p{
+    margin-top:14px;
+    color:rgba(28,23,18,0.65);
+    line-height:1.6;
+  }
+
+  /* ---------- menu ---------- */
+  #menu{ background:var(--paper); }
+  .tabs{
+    display:flex; flex-wrap:wrap; gap:10px;
+    justify-content:center;
+    margin-bottom:40px;
+  }
+  .tab{
+    padding:10px 20px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--cream);
+    font-weight:700;
+    font-size:0.86rem;
+    cursor:pointer;
+    transition:background 0.18s, color 0.18s, border-color 0.18s;
+  }
+  .tab.active{
+    background:var(--green-deep);
+    color:var(--cream);
+    border-color:var(--green-deep);
+  }
+  .menu-panel{ display:none; }
+  .menu-panel.active{ display:block; animation:fadeIn 0.35s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:0 48px;
+    max-width:940px;
+    margin:0 auto;
+  }
+  .menu-item{
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:16px;
+    padding:16px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .menu-item .name{
+    font-weight:700;
+    font-size:1rem;
+  }
+  .menu-item .desc{
+    display:block;
+    font-weight:400;
+    font-size:0.82rem;
+    color:rgba(28,23,18,0.6);
+    margin-top:3px;
+    line-height:1.4;
+  }
+  .menu-item .price{
+    flex:none;
+    font-size:0.98rem;
+    font-weight:600;
+    color:var(--brick-dark);
+    white-space:nowrap;
+  }
+  @media (max-width:760px){
+    .menu-grid{ grid-template-columns:1fr; }
+  }
+  .menu-note{
+    text-align:center;
+    margin-top:36px;
+    font-size:0.85rem;
+    color:rgba(28,23,18,0.55);
+  }
+
+  /* ---------- order section ---------- */
+  #ordina{
+    background:var(--ink);
+    color:var(--cream);
+  }
+  #ordina .section-head .eyebrow{ color:var(--saffron); }
+  #ordina .section-head .eyebrow::before{ background:var(--saffron); }
+  #ordina .section-head p{ color:rgba(250,246,238,0.68); }
+  .order-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .order-card{
+    background:rgba(250,246,238,0.05);
+    border:1px solid rgba(250,246,238,0.14);
+    border-radius:var(--radius);
+    padding:34px 30px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .order-card .icon{
+    width:46px; height:46px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--brick);
+  }
+  .order-card.wa .icon{ background:#25D366; }
+  .order-card h3{ font-size:1.3rem; color:var(--cream); }
+  .order-card p{
+    color:rgba(250,246,238,0.65);
+    font-size:0.92rem;
+    line-height:1.6;
+    margin:0;
+  }
+  .order-card .btn{ align-self:flex-start; margin-top:6px; }
+  @media (max-width:700px){
+    .order-cards{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- dove siamo ---------- */
+  #dove{ background:var(--paper); }
+  .dove-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .info-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:22px; }
+  .info-list li{ display:flex; gap:16px; align-items:flex-start; }
+  .info-list .ico{
+    flex:none; width:38px; height:38px; border-radius:50%;
+    background:var(--green-deep); color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .info-list .label{ font-weight:700; font-size:0.95rem; }
+  .info-list .value{ font-size:0.9rem; color:rgba(28,23,18,0.66); margin-top:2px; }
+  .map-card{
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--line);
+    aspect-ratio:4/3;
+  }
+  .map-card iframe{ width:100%; height:100%; border:0; }
+
+  .payments{
+    margin-top:30px;
+    display:flex; gap:10px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .payments span{
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:rgba(28,23,18,0.6);
+  }
+
+  @media (max-width:760px){
+    .dove-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--green-deeper);
+    color:rgba(250,246,238,0.6);
+    padding:38px 0;
+    font-size:0.82rem;
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  footer strong{ color:var(--cream); }
+
+  @media (max-width:900px){
+    .hero .wrap{ grid-template-columns:1fr; }
+    .medallion-wrap{ order:-1; }
+    .medallion{ width:220px; height:220px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <img src="logo.png" alt="Ali Baba — Ristorante Kebap Pizza">
+    </div>
+    <nav>
+      <a href="#menu">Menù</a>
+      <a href="#ordina">Come ordinare</a>
+      <a href="#dove">Dove siamo</a>
+    </nav>
+    <a href="#ordina" class="btn btn-call" style="padding:10px 18px; font-size:0.85rem;">Prenota ora</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Corso Nizza 54 · Cuneo</div>
+      <h1>Kebap turco e pizza <em>napoletana</em>,<br>nello stesso forno.</h1>
+      <p class="lead">Ali Baba porta a Cuneo il meglio di due cucine: kebap, falafel e pide preparati alla turca, pizza e piatti italiani cotti come si deve. Aperto tutti i giorni, orario continuato.</p>
+      <div class="cta-row">
+        <a href="tel:+390000000000" class="btn btn-call" id="callBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.35 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.25a2 2 0 0 1 2.11-.45c.74.33 1.53.56 2.34.68A2 2 0 0 1 22 16.92z"/></svg>
+          Chiama il ristorante
+        </a>
+        <a href="#" class="btn btn-whatsapp" id="waBtn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.27 4.9L2 22l5.25-1.38A9.94 9.94 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.2c-1.62 0-3.13-.44-4.43-1.2l-.32-.19-3.12.82.83-3.04-.2-.31A8.17 8.17 0 0 1 3.84 12c0-4.53 3.68-8.2 8.2-8.2 4.53 0 8.2 3.67 8.2 8.2 0 4.53-3.67 8.2-8.2 8.2zm4.5-6.14c-.25-.12-1.47-.72-1.7-.8-.23-.08-.4-.12-.56.13-.17.25-.64.8-.79.96-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.4.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+          Ordina su WhatsApp
+        </a>
+      </div>
+      <div class="hero-info">
+        <span>&#128337; Orario continuato · tutti i giorni</span>
+        <span>&#127903; Si accettano ticket restaurant</span>
+      </div>
+    </div>
+
+    <div class="medallion-wrap">
+      <svg class="medallion" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spiedo che ruota, metà kebap e metà pizza">
+        <defs>
+          <pattern id="doner" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect width="10" height="10" fill="#b23a2e"/>
+            <line x1="0" y1="0" x2="0" y2="10" stroke="#8f2c22" stroke-width="4"/>
+          </pattern>
+          <pattern id="pizza" width="14" height="14" patternUnits="userSpaceOnUse">
+            <rect width="14" height="14" fill="#d9a441"/>
+            <circle cx="7" cy="7" r="2.4" fill="#b23a2e"/>
+          </pattern>
+        </defs>
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#d9a441" stroke-width="1.5" stroke-dasharray="2 6"/>
+        <path d="M150 150 L150 20 A130 130 0 0 1 262.6 84.9 Z" fill="url(#doner)"/>
+        <path d="M150 150 L262.6 84.9 A130 130 0 0 1 262.6 215.1 Z" fill="url(#pizza)"/>
+        <path d="M150 150 L262.6 215.1 A130 130 0 0 1 150 280 Z" fill="url(#doner)"/>
+        <path d="M150 150 L150 280 A130 130 0 0 1 37.4 215.1 Z" fill="url(#pizza)"/>
+        <path d="M150 150 L37.4 215.1 A130 130 0 0 1 37.4 84.9 Z" fill="url(#doner)"/>
+        <path d="M150 150 L37.4 84.9 A130 130 0 0 1 150 20 Z" fill="url(#pizza)"/>
+        <circle cx="150" cy="150" r="132" fill="none" stroke="#1f3d2e" stroke-width="6"/>
+      </svg>
+      <div class="medallion-center"><span>ali baba</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <span>Corso Nizza, 54 — 12100 Cuneo (CN)</span>
+    <span>·</span>
+    <span>Kebap · Pizza · Piadine · Pide</span>
+    <span>·</span>
+    <span>Forno per pizza e pizza turca</span>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Il menù</div>
+      <h2>Dalla griglia al forno</h2>
+      <p>Una selezione dei piatti più richiesti, ripresi dal nostro menù esposto in vetrina. Il menù completo, con tutti gli allergeni, è disponibile in loco e su richiesta via WhatsApp.</p>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="combo">Menù combo</button>
+      <button class="tab" data-tab="panini">Panini &amp; piadine</button>
+      <button class="tab" data-tab="pizze">Pizze classiche</button>
+      <button class="tab" data-tab="turche">Pizze turche</button>
+      <button class="tab" data-tab="caldi">Piatti caldi</button>
+      <button class="tab" data-tab="dolci">Insalate, dolci &amp; bevande</button>
+    </div>
+
+    <div class="menu-panel active" id="panel-combo">
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="name">Panino Kebap Menù</span><span class="desc">panino, patatine e bevanda</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Piadina Kebap Menù</span><span class="desc">piadina, patatine e bevanda</span></div><span class="price mono">9,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Panino Falafel Menù</span><span class="desc">panino, patatine e bevanda</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Piadina Falafel Menù</span><span class="desc">piadina, patatine e bevanda</span></div><span class="price mono">9,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Chicken Burger Menù</span><span class="desc">panino, patatine e bevanda</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Hamburger Menù</span><span class="desc">panino, patatine e bevanda</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Cheeseburger Menù</span><span class="desc">panino, patatine e bevanda</span></div><span class="price mono">9,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Pizza Menù</span><span class="desc">pizza Margherita, patatine e bevanda</span></div><span class="price mono">8,00 €</span></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="panel-panini">
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="name">Panino Döner Kebap</span><span class="desc">carne, insalata, salsa</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Piadina Döner Kebap</span><span class="desc">carne, insalata, salsa</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Döner Kebap Box</span><span class="desc">porzione abbondante da asporto</span></div><span class="price mono">10,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Panino Falafel</span><span class="desc">vegetariano, insalata, salsa</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Piadina Falafel</span><span class="desc">vegetariano, insalata, salsa</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Chicken Burger</span><span class="desc">panino o piadina, pollo, insalata</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Panino Tonno</span><span class="desc">tonno, pomodoro, lattuga</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Panino Cotto e Formaggio</span><span class="desc">prosciutto cotto, formaggio</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Börek</span><span class="desc">sfoglia turca ripiena</span></div><span class="price mono">4,00 €</span></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="panel-pizze">
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="name">Margherita</span><span class="desc">pomodoro, mozzarella</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Diavola</span><span class="desc">pomodoro, mozzarella, salame piccante</span></div><span class="price mono">7,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Marinara</span><span class="desc">pomodoro, aglio, origano</span></div><span class="price mono">5,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Funghi</span><span class="desc">pomodoro, mozzarella, funghi</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Capricciosa</span><span class="desc">carciofi, funghi, prosciutto cotto, olive</span></div><span class="price mono">9,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Bufala</span><span class="desc">mozzarella di bufala, pomodorini, basilico</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Napoletana</span><span class="desc">mozzarella, alici, capperi, origano</span></div><span class="price mono">7,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Pizza Ali Baba</span><span class="desc">carne alla turca, funghi, olive</span></div><span class="price mono">9,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Pizza Kebap</span><span class="desc">mozzarella, carne kebap</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Vegetariana</span><span class="desc">verdure miste grigliate</span></div><span class="price mono">7,00 €</span></div>
+        <div class="menu-item"><div><span class="name">4 Stagioni</span><span class="desc">funghi, carciofi, prosciutto cotto, olive</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">4 Salumi</span><span class="desc">selezione di salumi misti</span></div><span class="price mono">8,00 €</span></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="panel-turche">
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="name">Pide con Mozzarella</span><span class="desc">pizza turca a barca, forno a legna</span></div><span class="price mono">7,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Pide con Funghi</span><span class="desc">mozzarella, funghi</span></div><span class="price mono">7,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Pide con Salame Piccante</span><span class="desc">mozzarella, salame piccante</span></div><span class="price mono">7,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Pide con Carne Fritta</span><span class="desc">carne alla turca fritta</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Pide alla Turca</span><span class="desc">ricetta della casa</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Lahmacun</span><span class="desc">carne macinata, cipolla, prezzemolo</span></div><span class="price mono">5,00 €</span></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="panel-caldi">
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="name">Kebap con riso, patate e insalata</span><span class="desc">piatto completo</span></div><span class="price mono">10,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Kebap alla vaschetta</span><span class="desc">solo carne, da asporto</span></div><span class="price mono">7,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Falafel con riso, patate e insalata</span><span class="desc">piatto vegetariano</span></div><span class="price mono">8,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Cotoletta con riso, patate e insalata</span><span class="desc">piatto completo</span></div><span class="price mono">10,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Alette di pollo con riso, patate e insalata</span><span class="desc">piatto completo</span></div><span class="price mono">10,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Wurstel con patate</span><span class="desc">piatto semplice</span></div><span class="price mono">8,00 €</span></div>
+      </div>
+    </div>
+
+    <div class="menu-panel" id="panel-dolci">
+      <div class="menu-grid">
+        <div class="menu-item"><div><span class="name">Insalata Tonno</span><span class="desc">pomodoro, lattuga, olive, mais, tonno</span></div><span class="price mono">5,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Insalata Greca</span><span class="desc">pomodoro, cetrioli, olive, feta</span></div><span class="price mono">6,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Baklava</span><span class="desc">pasta sfoglia, pistacchio, sciroppo</span></div><span class="price mono">3,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Sutlac</span><span class="desc">budino di riso turco</span></div><span class="price mono">3,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Tiramisù</span><span class="desc">fatto in casa</span></div><span class="price mono">3,00 €</span></div>
+        <div class="menu-item"><div><span class="name">Ayran</span><span class="desc">bevanda turca allo yogurt</span></div><span class="price mono">2,00 €</span></div>
+      </div>
+    </div>
+
+    <p class="menu-note">Prezzi e piatti indicativi tratti dal menù esposto in vetrina — chiedeteci il listino completo con allergeni via WhatsApp.</p>
+  </div>
+</section>
+
+<section id="ordina">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Come ordinare</div>
+      <h2>Prenota un tavolo o ordina da asporto</h2>
+      <p>Scegli come preferisci: una telefonata rapida, oppure un messaggio WhatsApp con quello che desideri ordinare.</p>
+    </div>
+
+    <div class="order-cards">
+      <div class="order-card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#faf6ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.35 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.25a2 2 0 0 1 2.11-.45c.74.33 1.53.56 2.34.68A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Chiama il ristorante</h3>
+        <p>Per prenotare un tavolo o chiedere informazioni, chiamaci direttamente: ti rispondiamo durante l'orario di apertura.</p>
+        <a href="tel:+390000000000" class="btn btn-call" id="callBtn2">Chiama ora</a>
+      </div>
+
+      <div class="order-card wa">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#faf6ee"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.27 4.9L2 22l5.25-1.38A9.94 9.94 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.2c-1.62 0-3.13-.44-4.43-1.2l-.32-.19-3.12.82.83-3.04-.2-.31A8.17 8.17 0 0 1 3.84 12c0-4.53 3.68-8.2 8.2-8.2 4.53 0 8.2 3.67 8.2 8.2 0 4.53-3.67 8.2-8.2 8.2zm4.5-6.14c-.25-.12-1.47-.72-1.7-.8-.23-.08-.4-.12-.56.13-.17.25-.64.8-.79.96-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.4.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+        </div>
+        <h3>Ordina su WhatsApp</h3>
+        <p>Scrivici cosa vuoi ordinare: piatti, quantità e orario di ritiro. Ti confermiamo noi i dettagli e i tempi di preparazione.</p>
+        <a href="#" class="btn btn-whatsapp" id="waBtn2" target="_blank" rel="noopener">Apri WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dove">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Dove siamo</div>
+      <h2>Corso Nizza, 54 — Cuneo</h2>
+    </div>
+
+    <div class="dove-grid">
+      <div>
+        <ul class="info-list">
+          <li>
+            <span class="ico">&#128205;</span>
+            <div><div class="label">Indirizzo</div><div class="value">Corso Nizza, 54 — 12100 Cuneo (CN)</div></div>
+          </li>
+          <li>
+            <span class="ico">&#128337;</span>
+            <div><div class="label">Orario</div><div class="value">Orario continuato, aperti tutti i giorni</div></div>
+          </li>
+          <li>
+            <span class="ico">&#127903;</span>
+            <div><div class="label">Pagamenti</div><div class="value">Contanti, carte e ticket restaurant</div></div>
+          </li>
+        </ul>
+        <div class="payments">
+          <span>Ticket restaurant</span>
+          <span>Visa</span>
+          <span>Mastercard</span>
+          <span>Bancomat</span>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Corso+Nizza+54+12100+Cuneo+CN&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Ali Baba</strong> — Ristorante Kebap · Pizza</div>
+    <div>Corso Nizza, 54 · 12100 Cuneo (CN)</div>
+  </div>
+</footer>
+
+<script>
+  // --- CONFIGURAZIONE: sostituisci con il numero reale del ristorante ---
+  const PHONE_INTERNATIONAL = "+390000000000"; // es. +39 0171 123456 (per la chiamata)
+  const WHATSAPP_NUMBER = "390000000000";       // stesso numero, solo cifre, prefisso incluso, senza +
+  const WHATSAPP_MESSAGE = "Ciao! Vorrei ordinare da Ali Baba 🙂";
+
+  document.querySelectorAll('#callBtn, #callBtn2').forEach(el => {
+    el.href = "tel:" + PHONE_INTERNATIONAL;
+  });
+  document.querySelectorAll('#waBtn, #waBtn2').forEach(el => {
+    el.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(WHATSAPP_MESSAGE);
+  });
+
+  // tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.menu-panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
