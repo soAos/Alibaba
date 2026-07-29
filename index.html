@@ -11,11 +11,11 @@
 <style>
   :root{
     --ink:#1c1712;
-    --green-deep:#1f3d2e;
-    --green-deeper:#152b21;
-    --brick:#b23a2e;
-    --brick-dark:#8f2c22;
-    --saffron:#d9a441;
+    --green-deep:#0b4c4a;
+    --green-deeper:#073635;
+    --brick:#c8102e;
+    --brick-dark:#960f26;
+    --saffron:#c9a227;
     --paper:#f3ead9;
     --cream:#faf6ee;
     --line: rgba(28,23,18,0.12);
@@ -217,6 +217,18 @@
     font-weight:600;
     color:var(--brick);
     font-size:1.1rem;
+  }
+
+  /* ---------- tulip motif divider (lale, Iznik-style) ---------- */
+  .tulip-border{
+    height:30px;
+    background-color:var(--paper);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 4 C14 4 10 10 12 16 C13 20 17 23 20 28 C23 23 27 20 28 16 C30 10 26 4 20 4 Z' fill='%23c8102e'/%3E%3Cpath d='M20 27 L20 37' stroke='%230b4c4a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M20 31 C15 31 12 34 10 33' stroke='%230b4c4a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M20 34 C25 34 28 37 30 36' stroke='%230b4c4a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='13' r='1.6' fill='%23c9a227'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;
+    background-position:center;
+    background-size:40px 40px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
   }
 
   /* ---------- strip ---------- */
@@ -469,27 +481,29 @@
       <svg class="medallion" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spiedo che ruota, metà kebap e metà pizza">
         <defs>
           <pattern id="doner" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-            <rect width="10" height="10" fill="#b23a2e"/>
-            <line x1="0" y1="0" x2="0" y2="10" stroke="#8f2c22" stroke-width="4"/>
+            <rect width="10" height="10" fill="#c8102e"/>
+            <line x1="0" y1="0" x2="0" y2="10" stroke="#960f26" stroke-width="4"/>
           </pattern>
           <pattern id="pizza" width="14" height="14" patternUnits="userSpaceOnUse">
-            <rect width="14" height="14" fill="#d9a441"/>
-            <circle cx="7" cy="7" r="2.4" fill="#b23a2e"/>
+            <rect width="14" height="14" fill="#c9a227"/>
+            <circle cx="7" cy="7" r="2.4" fill="#c8102e"/>
           </pattern>
         </defs>
-        <circle cx="150" cy="150" r="140" fill="none" stroke="#d9a441" stroke-width="1.5" stroke-dasharray="2 6"/>
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#c9a227" stroke-width="1.5" stroke-dasharray="2 6"/>
         <path d="M150 150 L150 20 A130 130 0 0 1 262.6 84.9 Z" fill="url(#doner)"/>
         <path d="M150 150 L262.6 84.9 A130 130 0 0 1 262.6 215.1 Z" fill="url(#pizza)"/>
         <path d="M150 150 L262.6 215.1 A130 130 0 0 1 150 280 Z" fill="url(#doner)"/>
         <path d="M150 150 L150 280 A130 130 0 0 1 37.4 215.1 Z" fill="url(#pizza)"/>
         <path d="M150 150 L37.4 215.1 A130 130 0 0 1 37.4 84.9 Z" fill="url(#doner)"/>
         <path d="M150 150 L37.4 84.9 A130 130 0 0 1 150 20 Z" fill="url(#pizza)"/>
-        <circle cx="150" cy="150" r="132" fill="none" stroke="#1f3d2e" stroke-width="6"/>
+        <circle cx="150" cy="150" r="132" fill="none" stroke="#0b4c4a" stroke-width="6"/>
       </svg>
       <div class="medallion-center"><span>ali baba</span></div>
     </div>
   </div>
 </section>
+
+<div class="tulip-border" role="presentation"></div>
 
 <div class="strip">
   <div class="wrap">
@@ -668,6 +682,8 @@
     </div>
   </div>
 </section>
+
+<div class="tulip-border" role="presentation"></div>
 
 <footer>
   <div class="wrap">
