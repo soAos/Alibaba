@@ -484,6 +484,133 @@
   #cartWaBtn{ width:100%; justify-content:center; }
   #cartWaBtn.disabled{ opacity:0.5; pointer-events:none; }
 
+  /* ---------- assistente chat AI ---------- */
+  .chat-fab{
+    position:fixed; left:22px; bottom:22px; z-index:80;
+    width:60px; height:60px; border-radius:50%;
+    background:var(--teal-deep); color:#fff; border:none;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 28px -8px rgba(0,0,0,0.55);
+    cursor:pointer;
+  }
+  .chat-fab:hover{ background:var(--teal-deeper); }
+  .chat-fab .dot{
+    position:absolute; top:-2px; right:-2px;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--red); border:2px solid var(--cream);
+  }
+
+  .chat-overlay{
+    position:fixed; inset:0; z-index:90;
+    background:rgba(8,32,31,0.55);
+    opacity:0; pointer-events:none;
+    transition:opacity 0.25s ease;
+  }
+  .chat-overlay.open{ opacity:1; pointer-events:auto; }
+
+  .chat-panel{
+    position:fixed; left:0; top:0; bottom:0; z-index:91;
+    width:min(400px, 92vw);
+    background:var(--cream);
+    display:flex; flex-direction:column;
+    transform:translateX(-100%);
+    transition:transform 0.3s ease;
+    box-shadow:14px 0 40px rgba(0,0,0,0.3);
+  }
+  .chat-panel.open{ transform:translateX(0); }
+  .chat-header{
+    padding:20px 22px;
+    background:var(--teal-black);
+    color:var(--cream);
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+  }
+  .chat-header .ch-title{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .chat-header .ch-title strong{ display:block; font-size:1rem; }
+  .chat-header .ch-title span{ display:block; font-size:0.74rem; color:rgba(250,246,238,0.6); font-family:'IBM Plex Mono', monospace; }
+  .chat-avatar{
+    width:36px; height:36px; border-radius:50%;
+    background:var(--brass); color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex:none;
+  }
+  .chat-close{
+    background:none; border:none; color:var(--cream);
+    font-size:1.3rem; line-height:1; cursor:pointer; opacity:0.8; flex:none;
+  }
+  .chat-close:hover{ opacity:1; }
+
+  .chat-body{ flex:1; overflow-y:auto; padding:18px 18px 8px; display:flex; flex-direction:column; gap:12px; }
+  .chat-msg{ max-width:88%; padding:11px 14px; border-radius:14px; font-size:0.88rem; line-height:1.5; }
+  .chat-msg.bot{ align-self:flex-start; background:var(--paper); border:1px solid var(--line); border-bottom-left-radius:4px; }
+  .chat-msg.user{ align-self:flex-end; background:var(--teal-deep); color:var(--cream); border-bottom-right-radius:4px; }
+
+  .chat-quick{ display:flex; flex-wrap:wrap; gap:8px; align-self:flex-start; max-width:100%; }
+  .chat-quick button{
+    padding:9px 14px; border-radius:999px;
+    border:1.5px solid var(--teal-deep); background:var(--cream);
+    color:var(--teal-deep); font-weight:700; font-size:0.82rem;
+    cursor:pointer; transition:background 0.15s, color 0.15s;
+  }
+  .chat-quick button:hover:not(:disabled){ background:var(--teal-deep); color:var(--cream); }
+  .chat-quick button.selected{ background:var(--teal-deep); color:var(--cream); }
+  .chat-quick button.ghost{ border-style:dashed; opacity:0.9; }
+  .chat-quick button:disabled{ cursor:default; opacity:0.55; }
+
+  .chat-suggest{ display:flex; flex-direction:column; gap:10px; align-self:stretch; }
+  .chat-dish{
+    display:flex; align-items:center; gap:12px;
+    background:var(--paper); border:1px solid var(--line); border-radius:12px;
+    padding:12px 14px;
+  }
+  .chat-dish .cd-info{ flex:1; min-width:0; }
+  .chat-dish .cd-name{ font-weight:700; font-size:0.9rem; }
+  .chat-dish .cd-desc{ font-size:0.76rem; color:rgba(24,19,16,0.6); margin-top:2px; }
+  .chat-dish .cd-tags{ margin-top:5px; display:flex; gap:5px; flex-wrap:wrap; }
+  .chat-dish .cd-tags span{
+    font-family:'IBM Plex Mono', monospace; font-size:0.6rem; text-transform:uppercase;
+    letter-spacing:0.03em; padding:2px 7px; border-radius:999px;
+    background:var(--teal-deep); color:var(--cream); opacity:0.85;
+  }
+  .chat-dish .cd-price{ flex:none; font-weight:700; color:var(--red-dark); font-size:0.86rem; font-family:'IBM Plex Mono', monospace; }
+  .chat-dish .cd-add{
+    flex:none; width:30px; height:30px; border-radius:50%;
+    border:1.5px solid var(--teal-deep); background:var(--cream); color:var(--teal-deep);
+    font-size:1rem; font-weight:800; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.15s, color 0.15s, transform 0.15s;
+  }
+  .chat-dish .cd-add:hover{ background:var(--teal-deep); color:var(--cream); }
+  .chat-dish .cd-add.added{ background:var(--red); border-color:var(--red); color:#fff; transform:scale(1.15); }
+
+  .chat-typing{ align-self:flex-start; display:flex; gap:4px; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:14px; border-bottom-left-radius:4px; }
+  .chat-typing span{ width:6px; height:6px; border-radius:50%; background:rgba(24,19,16,0.4); animation:typingBounce 1.2s infinite ease-in-out; }
+  .chat-typing span:nth-child(2){ animation-delay:0.15s; }
+  .chat-typing span:nth-child(3){ animation-delay:0.3s; }
+  @keyframes typingBounce{ 0%,60%,100%{ transform:translateY(0); opacity:0.5; } 30%{ transform:translateY(-4px); opacity:1; } }
+
+  .chat-footer{
+    padding:14px 16px; border-top:1px solid var(--line); background:var(--paper);
+    display:flex; gap:8px;
+  }
+  .chat-footer input{
+    flex:1; border:1px solid var(--line); border-radius:999px;
+    padding:10px 16px; font-family:'Manrope', sans-serif; font-size:0.86rem;
+    background:var(--cream); color:var(--ink);
+  }
+  .chat-footer input:focus{ outline:2px solid var(--teal-deep); outline-offset:1px; }
+  .chat-footer button{
+    flex:none; width:40px; height:40px; border-radius:50%; border:none;
+    background:var(--red); color:#fff; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .chat-footer button:hover{ background:var(--red-dark); }
+
+  @media (max-width:760px){
+    .chat-fab{ left:16px; bottom:16px; width:54px; height:54px; }
+    .chat-panel{ width:100vw; }
+  }
+
   @media (max-width:900px){
     .hero .wrap{ grid-template-columns:1fr; padding-top:52px; }
     .skewer-wrap{ order:-1; }
@@ -495,7 +622,7 @@
 <header>
   <div class="wrap">
     <div class="brand">
-     // <img src="logo.png" alt="Ali Baba — Ristorante Kebap Pizza"> 
+      <img src="logo.png" alt="Ali Baba — Ristorante Kebap Pizza">
     </div>
     <nav>
       <a href="#menu">Menù</a>
@@ -511,7 +638,7 @@
   <div class="wrap">
     <div>
       <div class="eyebrow">Corso Nizza 54 · Cuneo</div>
-      <h1>Il fuoco turco,<br>la pasta <em>italiana</em>.</h1>
+      <h1>Il fuoco turco,<br>la pasta <em>napoletana</em>.</h1>
       <p class="lead">Ali Baba porta a Cuneo il meglio di due cucine: kebap, falafel e pide preparati alla turca, pizza e piatti italiani cotti come si deve. Aperto tutti i giorni, orario continuato.</p>
       <div class="cta-row">
         <a href="tel:+390000000000" class="btn btn-call" id="callBtn">
@@ -583,27 +710,27 @@
 
     <div class="gallery-grid">
       <div class="photo-card g1">
-        <img src="spiedo.jpg" alt="Spiedo di kebap alla griglia">
+        <img src="img/spiedo.jpg" alt="Spiedo di kebap alla griglia">
         <div class="cap">Lo spiedo</div>
       </div>
       <div class="photo-card g2">
-        <img src="pizza.jpg" alt="Pizza appena sfornata">
+        <img src="img/pizza.jpg" alt="Pizza appena sfornata">
         <div class="cap">Pizza dal forno</div>
       </div>
       <div class="photo-card g3">
-        <img src="sala.jpg" alt="La sala del ristorante">
+        <img src="img/sala.jpg" alt="La sala del ristorante">
         <div class="cap">La sala</div>
       </div>
       <div class="photo-card g4">
-        <img src="pide.jpg" alt="Pide turche appena cotte">
+        <img src="img/pide.jpg" alt="Pide turche appena cotte">
         <div class="cap">Pide</div>
       </div>
       <div class="photo-card g5">
-        <img src="baklava.jpg" alt="Baklava fatta in casa">
+        <img src="img/baklava.jpg" alt="Baklava fatta in casa">
         <div class="cap">Baklava</div>
       </div>
       <div class="photo-card g6">
-        <img src="piadina.jpg" alt="Piadina döner kebap">
+        <img src="img/piadina.jpg" alt="Piadina döner kebap">
         <div class="cap">Piadina kebap</div>
       </div>
     </div>
@@ -811,10 +938,36 @@
   </div>
 </aside>
 
+<button class="chat-fab" id="chatFab" aria-label="Apri l'assistente Ali Baba">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <span class="dot"></span>
+</button>
+
+<div class="chat-overlay" id="chatOverlay"></div>
+<aside class="chat-panel" id="chatPanel" aria-label="Assistente per la scelta dei piatti">
+  <div class="chat-header">
+    <div class="ch-title">
+      <div class="chat-avatar">🧞</div>
+      <div>
+        <strong>Assistente Ali Baba</strong>
+        <span>Ti consiglio io cosa ordinare</span>
+      </div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="Chiudi assistente">&#10005;</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-footer">
+    <input type="text" id="chatInput" placeholder="Es. 'poca fame, piccante, 8 euro'…" autocomplete="off">
+    <button type="button" id="chatSend" aria-label="Invia messaggio">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg>
+    </button>
+  </div>
+</aside>
+
 <script>
   // --- CONFIGURAZIONE: sostituisci con il numero reale del ristorante ---
-  const PHONE_INTERNATIONAL = "+393511967816"; // es. +39 0171 123456 (per la chiamata)
-  const WHATSAPP_NUMBER = "393511967816";       // stesso numero, solo cifre, prefisso incluso, senza +
+  const PHONE_INTERNATIONAL = "+390000000000"; // es. +39 0171 123456 (per la chiamata)
+  const WHATSAPP_NUMBER = "390000000000";       // stesso numero, solo cifre, prefisso incluso, senza +
   const WHATSAPP_MESSAGE = "Ciao! Vorrei ordinare da Ali Baba 🙂";
 
   document.querySelectorAll('#callBtn, #callBtn2').forEach(el => {
@@ -940,6 +1093,339 @@
   cartOverlay.addEventListener('click', closeCart);
 
   renderCart();
+
+  // ================= ASSISTENTE AI PER LA SCELTA DEI PIATTI =================
+  (function(){
+    // --- costruisce il "database" dei piatti leggendo direttamente il menù già in pagina ---
+    function buildMenuDatabase(){
+      const list = [];
+      document.querySelectorAll('.menu-panel').forEach(panel => {
+        const tab = panel.id.replace('panel-', '');
+        panel.querySelectorAll('.menu-item').forEach(el => {
+          const nameEl = el.querySelector('.name');
+          const descEl = el.querySelector('.desc');
+          const priceEl = el.querySelector('.price');
+          if(!nameEl || !priceEl) return;
+          const name = nameEl.textContent.trim();
+          const desc = descEl ? descEl.textContent.trim() : '';
+          const price = parseFloat(priceEl.textContent.replace('€', '').trim().replace(',', '.'));
+          list.push({ name, desc, price, tab, tags: classify(name, desc, tab), filling: fillingLevel(name, tab) });
+        });
+      });
+      return list;
+    }
+
+    function classify(name, desc, tab){
+      const t = (name + ' ' + desc).toLowerCase();
+      const tags = [];
+      const meatWords = ['kebap','döner','doner','pollo','hamburger','cheeseburger','salame','prosciutto','carne','cotoletta','wurstel','alette'];
+      const fishWords = ['tonno','alici'];
+      const isMeat = meatWords.some(w => t.includes(w));
+      const isFish = fishWords.some(w => t.includes(w));
+      if(isMeat) tags.push('carne');
+      if(isFish) tags.push('pesce');
+      if(t.includes('piccant')) tags.push('piccante');
+      if(tab === 'pizze' || tab === 'turche' || t.includes('pizza') || t.includes('pide') || t.includes('lahmacun')) tags.push('pizza');
+      if(t.includes('baklava') || t.includes('sutlac') || t.includes('tiramis')) tags.push('dolce');
+      if(t.includes('ayran')) tags.push('bevanda');
+      // vegetariano: nessuna carne né pesce, e non è un dolce/bevanda
+      if(!isMeat && !isFish && !tags.includes('dolce') && !tags.includes('bevanda')) tags.push('vegetariano');
+      return tags;
+    }
+
+    function fillingLevel(name, tab){
+      const n = name.toLowerCase();
+      if(n.includes('insalata') || n.includes('ayran')) return 1;
+      if(n.includes('baklava') || n.includes('sutlac') || n.includes('tiramis') || n.includes('börek') || n.includes('borek')) return 1;
+      const byTab = { combo:3, panini:2, pizze:2, turche:2, caldi:3, dolci:2 };
+      return byTab[tab] || 2;
+    }
+
+    const menuDB = buildMenuDatabase();
+
+    const TASTE_OPTIONS = [
+      { key:'carne', label:'Carne 🥩' },
+      { key:'pesce', label:'Pesce 🐟' },
+      { key:'vegetariano', label:'Vegetariano 🥗' },
+      { key:'pizza', label:'Pizza 🍕' },
+      { key:'piccante', label:'Piccante 🌶️' },
+      { key:'dolce', label:'Dolce 🍮' }
+    ];
+    const HUNGER_OPTIONS = [
+      { key:1, label:'Poca fame 🙂' },
+      { key:2, label:'Fame normale 😋' },
+      { key:3, label:'Molta fame 🔥' }
+    ];
+    const BUDGET_OPTIONS = [
+      { key:6, label:'Fino a 6 €' },
+      { key:10, label:'Fino a 10 €' },
+      { key:999, label:'Nessun limite' }
+    ];
+
+    const state = { hunger:null, tastes:[], budget:null };
+
+    const chatBody = document.getElementById('chatBody');
+
+    function scrollToBottom(){ chatBody.scrollTop = chatBody.scrollHeight; }
+
+    function addBotMessage(text){
+      const div = document.createElement('div');
+      div.className = 'chat-msg bot';
+      div.textContent = text;
+      chatBody.appendChild(div);
+      scrollToBottom();
+    }
+
+    function addUserMessage(text){
+      const div = document.createElement('div');
+      div.className = 'chat-msg user';
+      div.textContent = text;
+      chatBody.appendChild(div);
+      scrollToBottom();
+    }
+
+    function showTyping(callback, delay){
+      const el = document.createElement('div');
+      el.className = 'chat-typing';
+      el.innerHTML = '<span></span><span></span><span></span>';
+      chatBody.appendChild(el);
+      scrollToBottom();
+      setTimeout(() => {
+        el.remove();
+        callback();
+      }, delay || 500);
+    }
+
+    function addQuickReplies(options, multi, onDone){
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-quick';
+      const selected = new Set();
+
+      function finish(){
+        wrap.querySelectorAll('button').forEach(b => b.disabled = true);
+        onDone(Array.from(selected));
+      }
+
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = opt.label;
+        btn.addEventListener('click', () => {
+          if(multi){
+            if(selected.has(opt.key)){ selected.delete(opt.key); btn.classList.remove('selected'); }
+            else { selected.add(opt.key); btn.classList.add('selected'); }
+          } else {
+            wrap.querySelectorAll('button').forEach(b => b.disabled = true);
+            onDone(opt.key);
+          }
+        });
+        wrap.appendChild(btn);
+      });
+
+      if(multi){
+        const done = document.createElement('button');
+        done.type = 'button';
+        done.className = 'ghost';
+        done.textContent = 'Continua →';
+        done.addEventListener('click', finish);
+        wrap.appendChild(done);
+      }
+
+      chatBody.appendChild(wrap);
+      scrollToBottom();
+    }
+
+    function addDishSuggestions(items){
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-suggest';
+      items.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'chat-dish';
+        const tagsHtml = item.tags.map(t => `<span>${t}</span>`).join('');
+        row.innerHTML = `
+          <div class="cd-info">
+            <div class="cd-name">${item.name}</div>
+            <div class="cd-desc">${item.desc}</div>
+            <div class="cd-tags">${tagsHtml}</div>
+          </div>
+          <div class="cd-price mono">${formatPrice(item.price)}</div>
+          <button type="button" class="cd-add" aria-label="Aggiungi ${item.name} al carrello">+</button>
+        `;
+        row.querySelector('.cd-add').addEventListener('click', (e) => {
+          if(!cart[item.name]) cart[item.name] = { price: item.price, qty: 0 };
+          cart[item.name].qty++;
+          renderCart();
+          const btn = e.currentTarget;
+          btn.classList.add('added');
+          setTimeout(() => btn.classList.remove('added'), 350);
+        });
+        wrap.appendChild(row);
+      });
+      chatBody.appendChild(wrap);
+      scrollToBottom();
+    }
+
+    function restartQuick(){
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-quick';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = 'Rifai la domanda 🔄';
+      btn.addEventListener('click', () => {
+        wrap.querySelectorAll('button').forEach(b => b.disabled = true);
+        state.hunger = null; state.tastes = []; state.budget = null;
+        showTyping(askHunger, 400);
+      });
+      chatBody.appendChild(wrap);
+      scrollToBottom();
+    }
+
+    // --- flusso conversazionale guidato ---
+    function askHunger(){
+      addBotMessage('Quanta fame hai oggi?');
+      addQuickReplies(HUNGER_OPTIONS, false, (key) => {
+        state.hunger = key;
+        addUserMessage(HUNGER_OPTIONS.find(o => o.key === key).label);
+        showTyping(askTastes, 500);
+      });
+    }
+
+    function askTastes(){
+      addBotMessage('Cosa ti va di mangiare? Puoi scegliere più opzioni, oppure premi "Continua" se ti va bene tutto.');
+      addQuickReplies(TASTE_OPTIONS, true, (keys) => {
+        state.tastes = keys;
+        addUserMessage(keys.length ? keys.map(k => TASTE_OPTIONS.find(o => o.key === k).label).join(', ') : 'Mi va bene qualsiasi cosa');
+        showTyping(askBudget, 500);
+      });
+    }
+
+    function askBudget(){
+      addBotMessage('Qual è il tuo budget indicativo a persona?');
+      addQuickReplies(BUDGET_OPTIONS, false, (key) => {
+        state.budget = key;
+        addUserMessage(BUDGET_OPTIONS.find(o => o.key === key).label);
+        showTyping(computeSuggestions, 600);
+      });
+    }
+
+    function scoreItem(item, ignoreTastes){
+      let s = 0;
+      if(state.budget != null){
+        if(item.price > state.budget + 0.01) return -Infinity;
+        s += 2 - Math.min(2, Math.abs(state.budget - item.price) / 4);
+      }
+      if(!ignoreTastes && state.tastes && state.tastes.length){
+        const matches = state.tastes.filter(t => item.tags.includes(t)).length;
+        if(matches === 0) s -= 4;
+        else s += matches * 3;
+      }
+      if(state.hunger != null){
+        s += 2 - Math.abs(item.filling - state.hunger);
+      }
+      return s;
+    }
+
+    function computeSuggestions(){
+      let scored = menuDB
+        .map(item => ({ item, score: scoreItem(item) }))
+        .filter(x => x.score > -Infinity)
+        .sort((a, b) => b.score - a.score);
+
+      let note = null;
+      let picks = scored.filter(x => x.score > -1).slice(0, 4).map(x => x.item);
+
+      if(picks.length === 0){
+        // nessuna corrispondenza sui gusti: rilassa il filtro gusti ma mantieni il budget
+        scored = menuDB
+          .map(item => ({ item, score: scoreItem(item, true) }))
+          .filter(x => x.score > -Infinity)
+          .sort((a, b) => b.score - a.score);
+        picks = scored.slice(0, 4).map(x => x.item);
+        note = 'Non ho trovato una corrispondenza perfetta con i tuoi gusti, ma con il tuo budget ti consiglio questi piatti:';
+      }
+
+      if(picks.length === 0){
+        addBotMessage('Con questo budget non trovo piatti adatti nel menù online: prova ad alzarlo un po\', oppure chiamaci e ti diciamo noi cosa possiamo offrirti!');
+      } else {
+        addBotMessage(note || 'In base a quello che mi hai detto, ti consiglio questi piatti 👇');
+        addDishSuggestions(picks);
+      }
+      restartQuick();
+    }
+
+    // --- parsing del testo libero digitato dall'utente ---
+    function parseFreeText(text){
+      const t = text.toLowerCase();
+      let changed = false;
+
+      if(/(poca fame|non ho molta fame|leggero|leggera|poco affamat)/.test(t)){ state.hunger = 1; changed = true; }
+      else if(/(molta fame|tanta fame|affamatissim|morto di fame|molto affamat)/.test(t)){ state.hunger = 3; changed = true; }
+      else if(/fame/.test(t)){ state.hunger = 2; changed = true; }
+
+      const tastesFound = [];
+      if(/(carne|kebap|pollo|hamburger)/.test(t)) tastesFound.push('carne');
+      if(/(pesce|tonno)/.test(t)) tastesFound.push('pesce');
+      if(/(vegetarian|verdur)/.test(t)) tastesFound.push('vegetariano');
+      if(/pizza/.test(t)) tastesFound.push('pizza');
+      if(/piccant/.test(t)) tastesFound.push('piccante');
+      if(/(dolce|dessert)/.test(t)) tastesFound.push('dolce');
+      if(tastesFound.length){ state.tastes = tastesFound; changed = true; }
+
+      const priceMatch = t.match(/(\d{1,2})(?:[.,]\d+)?\s*(?:€|euro)/);
+      if(priceMatch){ state.budget = parseFloat(priceMatch[1]); changed = true; }
+
+      return changed;
+    }
+
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+
+    function handleFreeText(){
+      const text = chatInput.value.trim();
+      if(!text) return;
+      addUserMessage(text);
+      chatInput.value = '';
+      const understood = parseFreeText(text);
+      showTyping(() => {
+        if(understood){
+          if(state.hunger == null) state.hunger = 2;
+          computeSuggestions();
+        } else {
+          addBotMessage('Puoi dirmi ad esempio: "ho molta fame, mi va la carne, budget 10 euro" — oppure usa i pulsanti qui sopra 👆');
+        }
+      }, 500);
+    }
+
+    chatSend.addEventListener('click', handleFreeText);
+    chatInput.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') handleFreeText();
+    });
+
+    // --- apertura/chiusura pannello chat ---
+    const chatFab = document.getElementById('chatFab');
+    const chatPanel = document.getElementById('chatPanel');
+    const chatOverlay = document.getElementById('chatOverlay');
+    let started = false;
+
+    function openChat(){
+      chatPanel.classList.add('open');
+      chatOverlay.classList.add('open');
+      if(!started){
+        started = true;
+        showTyping(() => {
+          addBotMessage('Ciao! 👋 Sono l\'assistente di Ali Baba. Ti aiuto a scegliere il piatto giusto in base a gusti, fame e budget.');
+          showTyping(askHunger, 500);
+        }, 400);
+      }
+    }
+    function closeChat(){
+      chatPanel.classList.remove('open');
+      chatOverlay.classList.remove('open');
+    }
+    chatFab.addEventListener('click', openChat);
+    document.getElementById('chatClose').addEventListener('click', closeChat);
+    chatOverlay.addEventListener('click', closeChat);
+  })();
 </script>
 
 </body>
